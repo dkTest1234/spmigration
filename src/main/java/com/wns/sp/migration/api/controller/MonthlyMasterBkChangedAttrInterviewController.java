@@ -46,7 +46,7 @@ public class MonthlyMasterBkChangedAttrInterviewController {
 	
 	/**
 	 * 
-	 * This api is used to fetch all the records from the db.
+	 * This api is used to fetch all the records from the database.
 	 * @return ResponseEntity<List<MonthlyMasterBkChangedAttrInterview>>
 	 * @throws MonthlyMasterBkChangedServiceException
 	 * @throws ResourceNotFoundException
@@ -58,12 +58,13 @@ public class MonthlyMasterBkChangedAttrInterviewController {
 		LOGGER.debug(" getAllMonthlyMasterBkChangedAttrs() invoked. ");
 		
 		List<MonthlyMasterBkChangedAttrInterview> mMBkChangedAttrInterviews = fetchAllMMBkChangedAttrs();
+				
 		LOGGER.debug("Total records fetched " + mMBkChangedAttrInterviews.size());
 		return new ResponseEntity<List<MonthlyMasterBkChangedAttrInterview>>(mMBkChangedAttrInterviews, HttpStatus.OK);
 	}
 
 	/**
-	 * private method to fetch all the records.
+	 * private method to fetch all the records from the database.
 	 * 
 	 * @return List<MonthlyMasterBkChangedAttrInterview>
 	 * @throws MonthlyMasterBkChangedServiceException
@@ -71,6 +72,7 @@ public class MonthlyMasterBkChangedAttrInterviewController {
 	 */
 	private List<MonthlyMasterBkChangedAttrInterview> fetchAllMMBkChangedAttrs()
 			throws MonthlyMasterBkChangedServiceException, ResourceNotFoundException {
+		
 		List<MonthlyMasterBkChangedAttrInterview> mMBkChangedAttrInterviews = 
 				mMBkChangedAttrInterviewService.getAllMonthlyMasterBkChangedAttrInterviews();
 		
@@ -105,7 +107,7 @@ public class MonthlyMasterBkChangedAttrInterviewController {
 	
 	
 	/**
-	 * This api is used to process the logic of Stored Procedure. 
+	 * This api is used to process the update operation. 
 	 * It is updating all records those are reflecting with sql where condition.
 	 * @return String
 	 * @throws MonthlyMasterBkChangedServiceException
@@ -116,8 +118,10 @@ public class MonthlyMasterBkChangedAttrInterviewController {
 
 		LOGGER.debug(" updateMMBkChangedAttrs() invoked. ");
 
+		//Fetching records from the database. If there is no data then it will send message as Data not found.
 		fetchAllMMBkChangedAttrs();
 		
+		//Calling service method to update records in the database.
 		mMBkChangedAttrInterviewService.updateMMBkChangedAttrInterview();
 
 		return "Update Process completed.";
